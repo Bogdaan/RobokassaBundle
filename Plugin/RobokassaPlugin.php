@@ -24,7 +24,7 @@ class RobokassaPlugin extends AbstractPlugin
         STATUS_PAUSE      = 80,
         STATUS_COMPLETED  = 100;
 
-    private $statuses = [
+    private $statuses = array(
         self::STATUS_NOT_FOUND  => 'NotFound',
         self::STATUS_PENDING    => 'Pending',
         self::STATUS_CANCELLED  => 'Cancelled',
@@ -32,7 +32,7 @@ class RobokassaPlugin extends AbstractPlugin
         self::STATUS_REFUND     => 'Refund',
         self::STATUS_PAUSE      => 'Pause',
         self::STATUS_COMPLETED  => 'Completed',
-    ];
+    );
 
     /** @var  Client */
     private $client;

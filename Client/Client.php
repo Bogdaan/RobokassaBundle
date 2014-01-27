@@ -48,26 +48,26 @@ class Client
         /** @var ExtendedDataInterface $data */
         $data = $transaction->getExtendedData();
         $data->set('inv_id', $inv_id);
-        $parameters = [
+        $parameters = array(
             'MrchLogin' => $this->login,
             'OutSum' => $transaction->getRequestedAmount(),
             'InvId' => $inv_id,
             'Desc' => 'test desc',
             'IncCurrLabel' => '',
             'SignatureValue' => $this->auth->sign($this->login, $transaction->getRequestedAmount(), $inv_id)
-        ];
+        );
 
         return sprintf('http://%s?%s', $this->getHost(), http_build_query($parameters));
     }
 
-    private function post($uri, array $parameters = [])
+    private function post($uri, array $parameters = array())
     {
         $guzzle  = new Guzzle($uri);
         $request = $guzzle->post(null, null, $parameters);
         return $request->send();
     }
 
-    private function sendXMLRequest($url, $params = [])
+    private function sendXMLRequest($url, $params = array())
     {
         $url = sprintf('%s?%s', $url, http_build_query($params));
         $response = $this->post($url, $params);
@@ -81,11 +81,11 @@ class Client
 
     public function requestOpState($inv_id, $out_sum)
     {
-        $params = [
+        $params = array(
             'MerchantLogin' => $this->login,
             'InvoiceID' => $inv_id,
             'Signature' => $this->auth->signXML($this->login, $inv_id),
-        ];
+        );
         if ($this->test) {
             $params['StateCode'] = 100;
         }
